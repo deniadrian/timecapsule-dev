@@ -3,6 +3,7 @@
 import { db } from "./db"
 import { auth } from "./auth"
 import { redirect } from "next/navigation"
+import { revalidatePath } from "next/cache"
 
 export async function createCapsule(formData: FormData) {
   const session = await auth()
@@ -27,5 +28,6 @@ export async function createCapsule(formData: FormData) {
     },
   })
 
+  revalidatePath("/dashboard")
   redirect("/dashboard")
 }
